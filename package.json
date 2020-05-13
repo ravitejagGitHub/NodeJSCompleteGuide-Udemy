@@ -1,0 +1,23 @@
+{
+  "name": "nodejscompleteguide-udemy",
+  "version": "1.0.0",
+  "description": "Complete Node js practice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravitejagGitHub/NodeJSCompleteGuide-Udemy.git"
+  },
+  "author": "Raviteja Giduturi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ravitejagGitHub/NodeJSCompleteGuide-Udemy/issues"
+  },
+  "homepage": "https://github.com/ravitejagGitHub/NodeJSCompleteGuide-Udemy#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
