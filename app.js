@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
         res.write('        <body>');
         res.write(`           
             <form action="/message" method="POST">
-            <input type="text" /> 
+            <input type="text" name="message"/> 
             <button type=""submit> Send ... </button></form>
         `);
         res.write('        </body>');
@@ -25,9 +25,21 @@ const server = http.createServer((req, res) => {
     }
 
     if (req.url === '/message' && req.method == "POST") {
-        fs.writeFileSync('message.txt', 'dummy');
+        const body = [];
+        req.on('data', (chunk)=>{
+            console.log('chunk ' + chunk);
+            body.push(chunk);
+        });
+        req.on('end', (chunk)=>{
+            const parsedBody = Buffer.concat(body).toString();
+            console.log(Buffer.concat(body));
+            console.log(parsedBody);
+            const message = parsedBody.split('=')[1];
+            fs.writeFileSync('message.txt', message);
+        })
+
         res.statusCode = 302; // Redirect found.
-        res.setHeader('Location','/test'); // new location path.
+        res.setHeader('Location','/'); // new location path.
         return res.end();
     }
 
@@ -45,5 +57,5 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3000, '127.0.0.1', () => {
-    console.log(`Server Runnig ... ${process.env.PORT}`);
+    console.log(`Server Runnig ...`);
 });
