@@ -18,7 +18,7 @@ app.use(('/', (req, res, next) => {
     next(); // Allow the request to continue to the next middleware.
 }));
 
-app.use('/admin', adminRouter);
+app.use('/admin', adminRouter.router);
 app.use('/shop', shopRouter);
 
 app.use('/hello', (req, res, next) => {
