@@ -9,21 +9,24 @@ const getAddProducts = (req, res, next) => {
 };
 
 const postProduct = (req, res, next) => {
-    const product= new Product(req.body.title)
+    const product = new Product(req.body.title)
     product.save();
     res.redirect("/shop")
 };
 
 
-const getAllProducts =  (req, res, next) => {
+const getAllProducts = (req, res, next) => {
     // res.send(`<h1> Home </h1>`);
-   //  console.log('products ', products);
+    //  console.log('products ', products);
     //res.sendFile(path.join(rootDir, 'view', 'shop.html'));
-    res.render('shop', {
-        pageTitle : 'Shop',
-        prods: Product.fetchAll(),
-        path : '/'
+    Product.fetchAll(products => {
+        res.render('shop', {
+            pageTitle: 'Shop',
+            prods: products,
+            path: '/'
+        })
     })
+
 };
 
 module.exports = {
