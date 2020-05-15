@@ -8,6 +8,7 @@ const app = express();
 const rootDir = require('./utils/path');
 const adminRouter = require('./routes/admin');
 const shopRouter = require('./routes/shop');
+const errorController = require('./controllers/errors');
 
 app.set('view engine', 'pug');
 app.set('views', 'views'); // folder name
@@ -31,12 +32,7 @@ app.use('/hello', (req, res, next) => {
 });
 
 
-app.use((req, res, next) => {
-   // res.status(404).sendFile(path.join(rootDir, 'view', '404.html'));
-   res.status(404).render('404', {
-       pageTitle: 'Page Not Found'
-   });
-});
+app.use(errorController.getPageNotFound);
 
 
 app.listen(3000); // will create server with port;
