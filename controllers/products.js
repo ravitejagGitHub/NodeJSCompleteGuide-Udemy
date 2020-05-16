@@ -19,7 +19,7 @@ const getAllProducts = (req, res, next) => {
     // res.send(`<h1> Home </h1>`);
     //  console.log('products ', products);
     //res.sendFile(path.join(rootDir, 'view', 'shop.html'));
-    Product.fetchAll(products => {
+    Product.fetchAll().then(products => {
         res.render('shop', {
             pageTitle: 'Shop',
             prods: products,

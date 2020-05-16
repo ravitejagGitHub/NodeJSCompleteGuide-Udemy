@@ -2,7 +2,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoDBConnect = require('./utils/database');
+const mongoDBConnect = require('./utils/database').connect;
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 
-mongoDBConnect(client=> {
-    console.log(client);
+mongoDBConnect(db=> {
+  //  console.log(db);
     app.listen(3000);
 })
