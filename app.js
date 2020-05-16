@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findById('5ebff1e0f776ae024a420bd8')
+  User.findById('5ec03a1024e27139d88885e8')
     .then(user => {
-      req.user = new User(user.name, user.email, user.cart, user._id);
+      req.user = user;
       next();
     })
     .catch(err => console.log(err));
@@ -32,7 +32,21 @@ app.use(shopRoutes);
 app.use(errorController.getPageNotFound);
 
 
-mongoDBConnect(db=> {
+mongoDBConnect(db => {
   //  console.log(db);
-    app.listen(3000);
+  User.findOne().then(user => {
+    if (!user) {
+      const user = new User({
+        name: 'raviteja',
+        email: 'raviteja.giduturi@gmail.com',
+        cart: {
+          items: []
+        }
+      });
+      console.log('New User Created!')
+      return user.save();
+    }
+  }).catch(err => console.log(err));
+
+  app.listen(3000);
 })
