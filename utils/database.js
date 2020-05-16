@@ -13,13 +13,13 @@ const mongoConnect = (cb)=>{
     }).catch(err=> console.log(err))
 };
 
-const getDB = ()=>{
+const getDb = ()=>{
     if(_db) {
         return _db;
     }
     throw 'No Dtabase Found!';
 };
 exports.connect  = mongoConnect;
-exports.getDB  = getDB;
+exports.getDb  = getDb;
 
 
